@@ -1,20 +1,40 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
+import Ejercicio1 from './Screens/Ejercicio1';
+import Ejercicio2 from './Screens/Ejercicio2';
+import { Card } from './Components/Card';
 
-export default function App() {
+const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+function Ejercicio2Stack() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen
+        name="Ejercicio2List"
+        component={Ejercicio2}
+        options={{ headerShown: false, headerMode: 'none' }}
+      />
+      <Stack.Group screenOptions={{ presentation: 'modal' }}>
+        <Stack.Screen
+          name="Card"
+          component={Card}
+          options={{ headerShown: true, headerMode: 'none' }}
+        />
+      </Stack.Group>
+    </Stack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Ejercicio2" component={Ejercicio2Stack} />
+        <Tab.Screen name="Ejercicio1" component={Ejercicio1} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
