@@ -34,24 +34,23 @@ export default function Ejercicio1() {
     }
   }, [attempts, game]);
 
+  const setVariables = () => {
+    setIsVisible(true);
+    setNextLevel(false);
+    setFirstSelectedCharacter(null);
+    setSecondSelectedCharacter(null);
+    setPairingCharArr([]);
+  };
+
   useEffect(() => {
     if (nextLevel) {
       if (gameLvl < 4) {
-        setIsVisible(true)
-        setNextLevel(false);
-        setAttempts(3);
+        setVariables()
         handleStartGame();
-        setFirstSelectedCharacter(null);
-        setSecondSelectedCharacter(null);
-        setPairingCharArr([]);
       } else {
-        setIsVisible(true)
-        setNextLevel(false);
+        setVariables()
         setGameLvl(1);
         setGame([]);
-        setFirstSelectedCharacter(null);
-        setSecondSelectedCharacter(null);
-        setPairingCharArr([]);
         alert('you win');
       }
     }
